@@ -1,14 +1,17 @@
+require('dotenv').config();
+
 const express = require('express')
 const app = express()
-const router = require('./router/router')
+const commonRouter = require('./router/common.router')
+var bodyParser = require("body-parser"); //for parsing data from input
 
 app.use(express.json())
-require('dotenv').config()
 
 
-app.get('/', router)
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/add', router)
+app.use('/api', commonRouter)
+
 
 
 PORT = process.env.PORT || 4000;
